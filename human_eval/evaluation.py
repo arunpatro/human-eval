@@ -67,7 +67,9 @@ def evaluate_functional_correctness(
             futures.append(future)
             completion_id[task_id] += 1
             n_samples += 1
-
+        
+        # Filter out problems that are not attempted.
+        problems = {k: v for k, v in problems.items() if k in completion_id}
         assert len(completion_id) == len(problems), "Some problems are not attempted."
 
         print("Running test suites...")
